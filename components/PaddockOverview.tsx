@@ -27,7 +27,21 @@ const PaddockOverview: React.FC = () => {
                 
                 {/* WIDGET 1: NEXT EVENT (Event Block Style) */}
                 <div onClick={goToCalendar} className="bg-f1-card rounded-2xl overflow-hidden shadow-2xl border border-white/5 font-display italic transition-all hover:shadow-glow group cursor-pointer relative h-full flex flex-col">
-                    {nextRace?.trackMap && <div className="absolute right-0 top-0 h-full w-1/2 opacity-10 pointer-events-none z-0"><img src={nextRace.trackMap} alt="" className="h-full w-full object-contain object-right transform scale-125" /></div>}
+                    {nextRace?.trackMap && (
+                        <div className="absolute right-0 top-0 h-full w-1/2 opacity-10 pointer-events-none z-0">
+                            <img src={nextRace.trackMap} alt="" className="h-full w-full object-contain object-right transform scale-125" />
+                        </div>
+                    )}
+                    
+                    {/* Centered City Overlay for Paddock Widget */}
+                    {nextRace && (
+                        <div className="absolute bottom-4 left-0 right-0 z-20 flex justify-center pointer-events-none">
+                            <div className="bg-black/40 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 flex items-center gap-1.5 shadow-2xl transition-all group-hover:bg-f1-pink/20 group-hover:border-f1-pink/30">
+                                <MapPin size={10} className="text-f1-pink" />
+                                <span className="text-[10px] font-bold text-white uppercase tracking-widest">{nextRace.city}</span>
+                            </div>
+                        </div>
+                    )}
                     
                     <div className="p-4 bg-white/5 border-b border-white/5 flex justify-between items-center not-italic z-10">
                         <div className="flex items-center space-x-2">
@@ -41,8 +55,17 @@ const PaddockOverview: React.FC = () => {
                         {nextRace ? (
                             <>
                                 <h3 className="text-4xl md:text-5xl font-black text-white uppercase leading-none tracking-tighter mb-2 transition-colors group-hover:text-f1-pink">{nextRace.country} GP</h3>
-                                <div className="flex items-center text-slate-400 text-sm md:text-lg font-medium not-italic uppercase tracking-wider mb-6">
+                                <div className="flex items-center text-slate-400 text-sm md:text-lg font-medium not-italic uppercase tracking-wider mb-2">
                                     <MapPin size={14} className="mr-1.5 text-f1-pink" /> {nextRace.circuitName}
+                                </div>
+
+                                {/* Minimal Info Row */}
+                                <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.2em] text-white/40 mb-6">
+                                    <span>Runde {nextRace.round}</span>
+                                    <span className="w-1 h-1 rounded-full bg-white/10"></span>
+                                    <span className={nextRace.format === 'sprint' ? 'text-orange-500/60' : ''}>
+                                        {nextRace.format === 'sprint' ? 'Sprint' : 'Standard'}
+                                    </span>
                                 </div>
                                 
                                 <div className="grid grid-cols-2 gap-4 not-italic">

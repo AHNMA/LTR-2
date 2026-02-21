@@ -69,7 +69,7 @@ const StandingsPage: React.FC = () => {
                               <div key={candidate.id} className="bg-white/5 backdrop-blur rounded-xl p-3 border border-white/5 flex items-center justify-between group hover:bg-white/10 transition-colors">
                                   <div className="flex items-center space-x-3">
                                       <div className={`w-10 h-10 rounded-full overflow-hidden shrink-0 border-2 ${!isDrivers ? 'bg-white p-1' : 'bg-slate-800'}`} style={{ borderColor: (isDrivers ? (teams.find(t=>t.id===(candidate as any).teamId)?.color) : (candidate as any).color) || '#e10059' }}>
-                                          <img src={isDrivers ? (candidate as any).image : (candidate as any).logo} className="w-full h-full object-cover" alt="" />
+                                          {(isDrivers ? (candidate as any).image : (candidate as any).logo) && <img src={isDrivers ? (candidate as any).image : (candidate as any).logo} className="w-full h-full object-cover" alt="" />}
                                       </div>
                                       <div className="font-display font-black text-base leading-none text-white uppercase italic tracking-tight">{name}</div>
                                   </div>
@@ -119,7 +119,7 @@ const StandingsPage: React.FC = () => {
                                         <div className={`font-display font-black text-2xl w-9 h-9 flex items-center justify-center rounded-lg shadow-sm ${item.rank === 1 ? 'bg-yellow-400 text-slate-900 shadow-glow' : item.rank === 2 ? 'bg-slate-300 text-slate-900' : item.rank === 3 ? 'bg-amber-600 text-white' : 'text-slate-400 bg-white/5'}`}>{item.rank}</div>
                                     </div>
                                     <div className="col-span-5 md:col-span-4 pl-4 flex items-center">
-                                        <div className={`w-10 h-10 rounded-full overflow-hidden border border-white/10 mr-4 bg-slate-800 shrink-0 ${!isDrivers ? 'p-1 bg-white' : ''}`}><img src={isDrivers ? (item as any).image : (item as any).logo} className="w-full h-full object-cover" /></div>
+                                        <div className={`w-10 h-10 rounded-full overflow-hidden border border-white/10 mr-4 bg-slate-800 shrink-0 ${!isDrivers ? 'p-1 bg-white' : ''}`}>{(isDrivers ? (item as any).image : (item as any).logo) && <img src={isDrivers ? (item as any).image : (item as any).logo} className="w-full h-full object-cover" />}</div>
                                         <div className="font-display font-bold text-white uppercase italic text-lg group-hover:text-f1-pink transition-colors truncate">{isDrivers ? (item as any).lastName : (item as any).name}</div>
                                     </div>
                                     <div className="col-span-2 hidden md:flex items-center justify-center">

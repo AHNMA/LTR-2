@@ -35,7 +35,7 @@ export const CalendarEditor: React.FC<{ block: ContentBlock }> = ({ block }) => 
                     {upcomingRaces.map((race) => (
                         <div key={race.id} className="flex items-center justify-between border-b border-slate-100 last:border-0 pb-3 last:pb-0">
                             <div className="flex items-center space-x-3">
-                                <img src={getFlagUrl(race.flag)} className="w-6 h-auto border border-black/10" alt="" />
+                                {getFlagUrl(race.flag) && <img src={getFlagUrl(race.flag)} className="w-6 h-auto border border-black/10" alt="" />}
                                 <div>
                                     <div className="font-display font-bold text-xl uppercase italic text-slate-800 leading-none">{race.country} GP</div>
                                     <div className="text-[10px] font-bold text-slate-400 uppercase mt-1">Runde {race.round}</div>
@@ -70,7 +70,7 @@ export const CalendarEditor: React.FC<{ block: ContentBlock }> = ({ block }) => 
                         <div key={race.id} className="p-4 flex items-center justify-between group hover:bg-white/5 transition-colors">
                             <div className="flex items-center space-x-4">
                                 <div className="text-xl font-black text-white/20 w-8">R{race.round}</div>
-                                <img src={getFlagUrl(race.flag)} className="w-8 h-auto border border-black/40" alt="" />
+                                {getFlagUrl(race.flag) && <img src={getFlagUrl(race.flag)} className="w-8 h-auto border border-black/40" alt="" />}
                                 <div>
                                     <div className="text-xl font-bold text-white uppercase leading-none tracking-tight">{race.country} GP</div>
                                     <div className="text-[10px] text-slate-400 uppercase not-italic mt-1">

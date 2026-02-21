@@ -96,8 +96,11 @@ export const HeadingEditor: React.FC<{ block: ContentBlock }> = ({ block }) => {
                 onInput={handleInput}
                 onPaste={handlePaste}
                 onKeyDown={handleKeyDown}
-                className="flex-1 min-w-0 bg-transparent focus:outline-none font-display font-black text-white uppercase italic tracking-tighter leading-[0.8] outline-none cursor-text min-h-[0.8em] break-words empty:before:content-[attr(data-placeholder)] empty:before:text-white/20"
-                style={{ fontSize: level === 2 ? '48px' : '36px', textAlign: block.attributes.textAlign }}
+                className="flex-1 min-w-0 bg-transparent focus:outline-none font-display font-black text-white uppercase italic tracking-tighter leading-[1.1] outline-none cursor-text min-h-[1.1em] break-words empty:before:content-[attr(data-placeholder)] empty:before:text-white/20"
+                style={{ 
+                    fontSize: level === 2 ? 'clamp(28px, 8vw, 48px)' : 'clamp(24px, 6vw, 36px)', 
+                    textAlign: block.attributes.textAlign 
+                }}
                 data-placeholder={`ÜBERSCHRIFT (MAX ${MAX_CHARS})`}
             />
         </div>

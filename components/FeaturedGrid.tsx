@@ -16,11 +16,13 @@ const FeaturedGrid: React.FC = () => {
               return (
               <div key={post.id} onClick={() => goToArticle(post.id)} className="group cursor-pointer bg-f1-card rounded-2xl shadow-xl hover:shadow-glow hover:-translate-y-1 transition-all duration-500 overflow-hidden border border-white/5 flex flex-col">
                   <div className="relative overflow-hidden aspect-video">
-                      <img 
-                          src={post.image} 
-                          alt={post.title} 
-                          className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110 opacity-90" 
-                      />
+                      {post.image && (
+                          <img 
+                              src={post.image} 
+                              alt={post.title} 
+                              className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110 opacity-90" 
+                          />
+                      )}
                       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-f1-dark/80 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-300"></div>
                       
                       <div className="absolute top-3 right-3">

@@ -30,7 +30,7 @@ import PredictionPage from './components/pages/PredictionPage';
 
 const seedDatabase = async () => {
     try {
-        await db.transaction('rw', db.users, db.posts, db.teams, db.drivers, db.races, db.media, async () => {
+        await db.transaction('rw', [db.users, db.posts, db.teams, db.drivers, db.races, db.media], async () => {
             const usersCount = await db.users.count();
             if (usersCount === 0) await db.users.bulkAdd(INITIAL_USERS);
             const postsCount = await db.posts.count();

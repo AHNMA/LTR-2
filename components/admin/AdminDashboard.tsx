@@ -731,7 +731,14 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onExit }) => {
                                             <img src={getFlagUrl(race.flag)} className="w-8 h-auto border border-black/50" alt="" />
                                             <div>
                                                 <div className="font-bold text-slate-900">{race.country}</div>
-                                                <div className="text-xs text-slate-500">{race.circuitName}</div>
+                                                <div className="text-xs text-slate-500 mb-1">{race.circuitName}</div>
+                                                <div className="flex items-center gap-2">
+                                                    <span className="text-[8px] font-black uppercase tracking-widest text-slate-400 bg-slate-100 px-1 rounded">Rd {race.round}</span>
+                                                    <span className="text-[8px] font-black uppercase tracking-widest text-slate-400 bg-slate-100 px-1 rounded">{race.city}</span>
+                                                    <span className={`text-[8px] font-black uppercase tracking-widest px-1 rounded ${race.format === 'sprint' ? 'bg-orange-100 text-orange-600' : 'bg-slate-100 text-slate-400'}`}>
+                                                        {race.format === 'sprint' ? 'Sprint' : 'Standard'}
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </td>
@@ -767,7 +774,14 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onExit }) => {
                                             <img src={getFlagUrl(race.flag)} className="w-8 h-auto border border-black/50" alt="" />
                                             <div>
                                                 <div className="font-bold text-slate-900">{race.country}</div>
-                                                <div className="text-xs text-slate-500">{race.circuitName}</div>
+                                                <div className="text-xs text-slate-500 mb-1">{race.circuitName}</div>
+                                                <div className="flex items-center gap-2">
+                                                    <span className="text-[8px] font-black uppercase tracking-widest text-slate-400 bg-slate-100 px-1 rounded">Rd {race.round}</span>
+                                                    <span className="text-[8px] font-black uppercase tracking-widest text-slate-400 bg-slate-100 px-1 rounded">{race.city}</span>
+                                                    <span className={`text-[8px] font-black uppercase tracking-widest px-1 rounded ${race.format === 'sprint' ? 'bg-orange-100 text-orange-600' : 'bg-slate-100 text-slate-400'}`}>
+                                                        {race.format === 'sprint' ? 'Sprint' : 'Standard'}
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </td>

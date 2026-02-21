@@ -27,7 +27,7 @@ export const TeamEditor: React.FC<{ block: ContentBlock }> = ({ block }) => {
                             {team.name}
                         </span>
                         <div className="h-7 w-12 flex items-center shrink-0 -translate-y-[2px]">
-                             <img src={team.logo} alt={team.name} className="max-w-full max-h-full object-contain object-left" />
+                             {team.logo && <img src={team.logo} alt={team.name} className="max-w-full max-h-full object-contain object-left" />}
                         </div>
                      </div>
                 </div>
@@ -54,11 +54,13 @@ export const TeamEditor: React.FC<{ block: ContentBlock }> = ({ block }) => {
                         />
 
                         <div className="relative z-10 w-full flex items-center justify-center p-6 h-full overflow-hidden">
-                            <img 
-                                src={team.carImage} 
-                                className="w-full h-auto object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] transition-transform duration-700 transform scale-90 @[768px]:scale-100 object-bottom" 
-                                alt={`${team.name} Car`} 
-                            />
+                            {team.carImage && (
+                                <img 
+                                    src={team.carImage} 
+                                    className="w-full h-auto object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] transition-transform duration-700 transform scale-90 @[768px]:scale-100 object-bottom" 
+                                    alt={`${team.name} Car`} 
+                                />
+                            )}
                         </div>
                     </div>
 
@@ -91,7 +93,7 @@ export const TeamEditor: React.FC<{ block: ContentBlock }> = ({ block }) => {
                                     <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-wider font-sans not-italic">Nation</span>
                                 </div>
                                 <div className="flex items-center justify-center">
-                                    <img src={getFlagUrl(team.nationalityFlag)} className="w-[18px] aspect-[3/2] object-cover border border-black/30 mr-1.5 -translate-y-[2px]" alt="" />
+                                    {getFlagUrl(team.nationalityFlag) && <img src={getFlagUrl(team.nationalityFlag)} className="w-[18px] aspect-[3/2] object-cover border border-black/30 mr-1.5 -translate-y-[2px]" alt="" />}
                                     <span className="text-lg font-bold text-white uppercase">{team.nationalityFlag}</span>
                                 </div>
                             </div>
@@ -121,7 +123,7 @@ export const TeamEditor: React.FC<{ block: ContentBlock }> = ({ block }) => {
                             {teamDrivers.map(d => (
                                 <div key={d.id} className="flex items-center justify-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5">
                                     <div className="w-12 h-12 rounded-full border-2 border-f1-card overflow-hidden bg-slate-800 shrink-0">
-                                        <img src={d.image} className="w-full h-full object-cover" title={`${d.firstName} ${d.lastName}`} />
+                                        {d.image && <img src={d.image} className="w-full h-full object-cover" title={`${d.firstName} ${d.lastName}`} />}
                                     </div>
                                     <div className="flex flex-col min-w-0 items-center">
                                         <div className="flex items-center mb-1 justify-center w-full">

@@ -91,8 +91,7 @@ const CalendarPage: React.FC = () => {
                             <div key={race.id} className={`bg-f1-card rounded-2xl shadow-xl border overflow-hidden transition-all hover:shadow-glow group ${isNext ? 'ring-2 ring-f1-pink border-transparent' : 'border-white/5'} ${isCompleted ? 'opacity-60 grayscale-[0.4] hover:opacity-100 hover:grayscale-0' : ''}`}>
                                 <div className="flex flex-col md:flex-row h-full">
                                     <div className="md:w-32 bg-white/5 border-b md:border-b-0 md:border-r border-white/5 p-6 flex flex-row md:flex-col items-center justify-between md:justify-center text-center shrink-0">
-                                        <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Rd {race.round}</div>
-                                        <img src={getFlagUrl(race.flag)} className="w-10 h-auto border border-black/40 shadow-xl mb-2" alt="" />
+                                        <img src={getFlagUrl(race.flag)} className="w-10 h-auto border border-black/40 shadow-xl mb-4" alt="" />
                                         {race.sessions?.race && (
                                             <div>
                                                 <div className="text-2xl font-bold font-display text-white leading-none italic">{new Date(race.sessions.race).getDate()}</div>
@@ -101,13 +100,35 @@ const CalendarPage: React.FC = () => {
                                         )}
                                     </div>
                                     <div className="flex-1 p-6 flex flex-col justify-center relative overflow-hidden font-display italic">
-                                        {race.trackMap && <div className="absolute right-0 bottom-[-20px] w-40 opacity-5 group-hover:opacity-10 transition-opacity transform rotate-12 pointer-events-none"><img src={race.trackMap} alt="Track" /></div>}
-                                        <div className="flex items-center space-x-3 mb-2">
+                                        {race.trackMap && (
+                                            <div className="absolute right-0 bottom-[-20px] w-40 opacity-5 group-hover:opacity-10 transition-opacity transform rotate-12 pointer-events-none">
+                                                <img src={race.trackMap} alt="Track" />
+                                            </div>
+                                        )}
+                                        
+                                        {/* Centered City Overlay for Calendar List */}
+                                        <div className="absolute bottom-4 right-6 z-20 hidden md:flex">
+                                            <div className="bg-white/5 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 flex items-center gap-1.5 shadow-sm transition-all group-hover:border-f1-pink/30">
+                                                <MapPin size={10} className="text-f1-pink" />
+                                                <span className="text-[9px] font-bold text-white/60 uppercase tracking-widest group-hover:text-white">{race.city}</span>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center space-x-3 mb-4">
                                             <h3 className="text-2xl md:text-4xl font-black text-white uppercase leading-none tracking-tight group-hover:text-f1-pink transition-colors">{race.country} Grand Prix</h3>
-                                            {race.format === 'sprint' && <span className="bg-orange-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider not-italic shadow-lg">Sprint</span>}
                                             {isCompleted && <span className="bg-white/10 text-slate-500 text-[9px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider not-italic">Beendet</span>}
                                         </div>
-                                        <div className="text-sm text-slate-500 font-bold uppercase not-italic tracking-widest flex items-center"><MapPin size={14} className="mr-2 text-f1-pink" /> {race.circuitName}</div>
+                                        <div className="text-sm text-slate-500 font-bold uppercase not-italic tracking-widest flex items-center mb-2">
+                                            <MapPin size={14} className="mr-2 text-f1-pink" /> {race.circuitName}
+                                        </div>
+
+                                        {/* Minimal Info Row */}
+                                        <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.2em] text-white/40">
+                                            <span>Runde {race.round}</span>
+                                            <span className="w-1 h-1 rounded-full bg-white/10"></span>
+                                            <span className={race.format === 'sprint' ? 'text-orange-500/60' : ''}>
+                                                {race.format === 'sprint' ? 'Sprint' : 'Standard'}
+                                            </span>
+                                        </div>
                                     </div>
                                     <div className="md:w-80 bg-white/5 p-6 border-t md:border-t-0 md:border-l border-white/5 flex flex-col justify-center text-xs font-bold uppercase tracking-widest">
                                         <div className="space-y-3">

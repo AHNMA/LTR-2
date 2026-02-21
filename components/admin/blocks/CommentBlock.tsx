@@ -66,11 +66,6 @@ export const CommentEditor: React.FC<{ block: ContentBlock }> = ({ block }) => {
                         placeholder="AUTOR..."
                     />
                 </div>
-                {blockSize !== 'small' && (
-                    <div className="text-[10px] font-black uppercase text-white/20 tracking-widest hidden md:block font-sans ml-4 shrink-0 whitespace-nowrap">
-                        Editorial Comment
-                    </div>
-                )}
             </div>
 
             {/* Accent Line */}

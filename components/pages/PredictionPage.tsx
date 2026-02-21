@@ -88,7 +88,7 @@ const PredictionPage: React.FC = () => {
                         onClick={() => setSelectedRaceId(race.id)}
                         className={`flex-shrink-0 px-4 py-2 rounded-lg border text-xs font-bold uppercase transition-all flex items-center ${statusColor}`}
                     >
-                        <img src={getFlagUrl(race.flag)} className="w-4 h-auto mr-2 border border-black/50" alt="" />
+                        {getFlagUrl(race.flag) && <img src={getFlagUrl(race.flag)} className="w-4 h-auto mr-2 border border-black/50" alt="" />}
                         {race.country}
                         {Icon}
                     </button>

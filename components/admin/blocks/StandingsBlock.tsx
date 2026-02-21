@@ -71,7 +71,7 @@ export const StandingsEditor: React.FC<{ block: ContentBlock }> = ({ block }) =>
                                 </span>
                                 <div className="flex items-center space-x-4">
                                     <div className="w-8 h-8 rounded-full overflow-hidden bg-white/10 border border-white/10 shrink-0">
-                                        <img src={(entry as any).image || entry.logo} className="w-full h-full object-cover" alt="" />
+                                        {((entry as any).image || entry.logo) && <img src={(entry as any).image || entry.logo} className="w-full h-full object-cover" alt="" />}
                                     </div>
                                     <div>
                                         <div className="text-2xl font-black text-white uppercase leading-none tracking-tighter group-hover:text-f1-pink transition-colors">

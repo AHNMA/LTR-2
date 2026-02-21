@@ -43,12 +43,14 @@ export const ImageEditor: React.FC<{ block: ContentBlock }> = ({ block }) => {
                         className="relative bg-slate-900"
                         style={containerStyles}
                     >
-                        <img 
-                            src={url} 
-                            className={`block transition-opacity duration-500 opacity-100 group-hover/container:opacity-90 ${isCustomRatio ? 'absolute inset-0 w-full h-full' : 'w-full'}`}
-                            style={imgStyles}
-                            alt="" 
-                        />
+                        {url && (
+                            <img 
+                                src={url} 
+                                className={`block transition-opacity duration-500 opacity-100 group-hover/container:opacity-90 ${isCustomRatio ? 'absolute inset-0 w-full h-full' : 'w-full'}`}
+                                style={imgStyles}
+                                alt="" 
+                            />
+                        )}
                         
                         {/* CREDITS: Bottom Left, Text Only, Full Width */}
                         <div className="absolute bottom-3 left-4 right-4 z-20 pointer-events-auto">

@@ -23,7 +23,7 @@ const TeamDetailPage: React.FC = () => {
                     <div className="max-w-2xl font-display">
                         <div className="flex items-center space-x-4 mb-6">
                             <div className="bg-white p-3 rounded-xl shadow-2xl"><img src={team.logo} alt={team.name} className="h-10 w-auto" /></div>
-                            <img src={getFlagUrl(team.nationalityFlag)} alt={team.nationalityText} className="h-8 w-auto rounded border border-black/50 shadow-lg" />
+                            {getFlagUrl(team.nationalityFlag) && <img src={getFlagUrl(team.nationalityFlag)} alt={team.nationalityText} className="h-8 w-auto rounded border border-black/50 shadow-lg" />}
                         </div>
                         <h1 className="text-6xl md:text-9xl font-black text-white uppercase italic tracking-tighter leading-[0.8] mb-8">{team.name}</h1>
                         <div className="flex flex-wrap gap-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">

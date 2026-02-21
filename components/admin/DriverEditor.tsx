@@ -229,11 +229,13 @@ const DriverEditor: React.FC<DriverEditorProps> = ({ driver, onSave, onCancel })
                                 <div className="relative">
                                     {formData.nationalityFlag && (
                                         <div className="absolute left-3 top-2.5 z-10 pointer-events-none">
-                                            <img 
-                                                src={getFlagUrl(formData.nationalityFlag)} 
-                                                className="w-5 h-auto border border-black/50" 
-                                                alt="" 
-                                            />
+                                            {getFlagUrl(formData.nationalityFlag) && (
+                                                <img 
+                                                    src={getFlagUrl(formData.nationalityFlag)} 
+                                                    className="w-5 h-auto border border-black/50" 
+                                                    alt="" 
+                                                />
+                                            )}
                                         </div>
                                     )}
                                     <select 

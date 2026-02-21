@@ -238,7 +238,7 @@ const MediaLibrary: React.FC<MediaLibraryProps> = ({ onSelect, onClose, selectLa
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
                         {filteredItems.map(item => (
                             <div key={item.id} onClick={() => { setSelectedItem(item); setShowDeleteConfirm(false); }} className={`relative aspect-square cursor-pointer rounded-lg overflow-hidden border-2 transition-all ${selectedItem?.id === item.id ? 'border-f1-pink shadow-lg' : 'border-transparent hover:border-slate-300'}`}>
-                                <img src={item.url} className="w-full h-full object-cover bg-slate-200" loading="lazy" />
+                                {item.url && <img src={item.url} className="w-full h-full object-cover bg-slate-200" loading="lazy" />}
                                 {selectedItem?.id === item.id && <div className="absolute top-1 right-1 bg-f1-pink text-white rounded-full p-1"><Check size={10} /></div>}
                             </div>
                         ))}
@@ -257,7 +257,7 @@ const MediaLibrary: React.FC<MediaLibraryProps> = ({ onSelect, onClose, selectLa
                             <h3 className="text-[10px] font-bold uppercase text-slate-400 tracking-widest">Vorschau</h3>
                             <button onClick={() => { setSelectedItem(null); setShowDeleteConfirm(false); }} className="text-slate-400 hover:text-slate-600"><X size={16} /></button>
                         </div>
-                        <img src={selectedItem.url} className="w-full rounded-lg mb-4 border border-slate-200 shadow-sm" alt="" />
+                        {selectedItem.url && <img src={selectedItem.url} className="w-full rounded-lg mb-4 border border-slate-200 shadow-sm" alt="" />}
                         <div className="space-y-3 text-xs flex-1">
                             {onSelect && (
                                 <button onClick={() => onSelect(selectedItem)} className="w-full bg-f1-pink text-white py-2.5 rounded-lg font-bold uppercase shadow-glow hover:bg-pink-700 transition-colors flex items-center justify-center mb-2">

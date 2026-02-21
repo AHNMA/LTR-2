@@ -29,11 +29,13 @@ const NewsFeed: React.FC = () => {
                     
                     {/* Image Column */}
                     <div className="w-full md:w-5/12 relative overflow-hidden h-56 md:h-auto">
-                        <img 
-                            src={post.image} 
-                            alt={post.title} 
-                            className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100" 
-                        />
+                        {post.image && (
+                            <img 
+                                src={post.image} 
+                                alt={post.title} 
+                                className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100" 
+                            />
+                        )}
                          <div className="absolute inset-0 bg-f1-dark/10 group-hover:bg-transparent transition-colors"></div>
                          
                          {/* Modern Section Badge */}

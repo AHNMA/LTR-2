@@ -163,11 +163,13 @@ const RaceEditor: React.FC<RaceEditorProps> = ({ race, onSave, onCancel }) => {
                                 <div className="relative">
                                     {formData.flag && (
                                         <div className="absolute left-3 top-2.5 z-10 pointer-events-none">
-                                            <img 
-                                                src={getFlagUrl(formData.flag)} 
-                                                className="w-5 h-auto border border-black/50" 
-                                                alt="" 
-                                            />
+                                            {getFlagUrl(formData.flag) && (
+                                                <img 
+                                                    src={getFlagUrl(formData.flag)} 
+                                                    className="w-5 h-auto border border-black/50" 
+                                                    alt="" 
+                                                />
+                                            )}
                                         </div>
                                     )}
                                     <select 

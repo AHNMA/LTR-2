@@ -22,7 +22,7 @@ const DriverDetailPage: React.FC = () => {
                         <div className="order-1 md:order-2 w-full md:w-7/12 pb-12 md:pl-12 font-display italic">
                              <div className="flex items-center space-x-6 mb-8 not-italic">
                                 <span className="text-7xl font-black text-white/5 leading-none">#{driver.raceNumber}</span>
-                                <img src={getFlagUrl(driver.nationalityFlag)} alt={driver.nationalityText} className="h-8 w-auto rounded border border-black/50 shadow-lg" />
+                                {getFlagUrl(driver.nationalityFlag) && <img src={getFlagUrl(driver.nationalityFlag)} alt={driver.nationalityText} className="h-8 w-auto rounded border border-black/50 shadow-lg" />}
                                 {team && (
                                     <div className="flex items-center space-x-3 bg-white/5 backdrop-blur-xl border border-white/10 px-4 py-2 rounded-xl cursor-pointer hover:bg-white/10 transition-all" onClick={() => goToTeam(team.id)}>
                                         <img src={team.logo} className="h-6 w-auto" alt="" />

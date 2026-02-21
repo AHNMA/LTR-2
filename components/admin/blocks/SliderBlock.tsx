@@ -52,12 +52,14 @@ export const SliderEditor: React.FC<{ block: ContentBlock }> = ({ block }) => {
                 <div className="relative bg-slate-900 group/image" style={getAspectRatioStyle()}>
                     {images.length > 0 ? (
                         <>
-                            <img 
-                                src={images[activeIndex].url} 
-                                className="w-full h-full transition-opacity duration-500 opacity-100 group-hover/image:opacity-90"
-                                style={{ objectFit: crop ? 'cover' : 'contain' }}
-                                alt="" 
-                            />
+                            {images[activeIndex].url && (
+                                <img 
+                                    src={images[activeIndex].url} 
+                                    className="w-full h-full transition-opacity duration-500 opacity-100 group-hover/image:opacity-90"
+                                    style={{ objectFit: crop ? 'cover' : 'contain' }}
+                                    alt="" 
+                                />
+                            )}
                             
                             {/* Credits (Bottom Left, Text Only, Full Width) */}
                             <div className="absolute bottom-3 left-4 right-4 z-20 pointer-events-auto">
@@ -144,7 +146,7 @@ export const SliderEditor: React.FC<{ block: ContentBlock }> = ({ block }) => {
                             onClick={() => setActiveIndex(i)}
                             className={`relative w-16 h-10 rounded overflow-hidden shrink-0 cursor-pointer transition-all duration-300 border-2 ${i === activeIndex ? 'border-f1-pink opacity-100 shadow-glow scale-105' : 'border-transparent opacity-40 hover:opacity-80 hover:border-white/30'}`}
                         >
-                            <img src={img.url} className="w-full h-full object-cover" alt="" />
+                            {img.url && <img src={img.url} className="w-full h-full object-cover" alt="" />}
                         </div>
                     ))}
                     <button 

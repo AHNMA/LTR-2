@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Calendar, MapPin, Zap, Clock, Info, Flag as FlagIcon } from 'lucide-react';
+import { Calendar, MapPin, Zap, Clock, Info, Trophy, Flag as FlagIcon } from 'lucide-react';
 import { ContentBlock, Race, SessionType } from '../../../types';
 import { useEditor } from '../editor/EditorContext';
 import { useData } from '../../../contexts/DataContext';
@@ -52,15 +52,15 @@ export const EventEditor: React.FC<{ block: ContentBlock }> = ({ block }) => {
 
     return (
         <div className="w-full font-display italic">
-            <div className="bg-f1-card rounded-2xl overflow-hidden shadow-2xl border border-white/5 relative">
+            <div className="bg-f1-card rounded-2xl overflow-hidden shadow-2xl border border-white/5 relative cursor-pointer group">
                 
                 {/* Header Section */}
                 <div className="p-6 pb-2 border-b border-white/5 bg-white/5 flex items-center justify-between relative z-20">
                      <div className="flex items-center gap-4">
                         <div className="flex flex-col">
-                            <div className="text-white font-black text-3xl md:text-4xl uppercase italic tracking-tight leading-none flex items-center gap-3">
-                                {race.country}
-                                <img src={getFlagUrl(race.flag)} className="w-[26px] aspect-[3/2] object-cover border border-black/30 -translate-y-[4px]" alt="" />
+                            <div className="text-white font-black text-3xl uppercase italic tracking-tight leading-none flex items-center gap-3">
+                                <span className="hover:text-f1-pink transition-colors">{race.country}</span>
+                                {getFlagUrl(race.flag) && <img src={getFlagUrl(race.flag)} className="w-[26px] aspect-[3/2] object-cover border border-black/30 -translate-y-[3px]" alt="" />}
                             </div>
                         </div>
                      </div>
@@ -76,42 +76,39 @@ export const EventEditor: React.FC<{ block: ContentBlock }> = ({ block }) => {
                     
                     {/* Visual Area (Track Map) */}
                     <div 
-                        className="w-full @[768px]:w-5/12 relative overflow-hidden border-b @[768px]:border-b-0 @[768px]:border-r border-white/5 flex items-center justify-center h-52 @[768px]:h-auto min-h-[250px] group/track"
+                        className="w-full @[768px]:w-5/12 relative overflow-hidden border-b @[768px]:border-b-0 @[768px]:border-r border-white/5 flex items-center justify-center h-52 @[768px]:h-auto min-h-[250px]"
                         style={{
                             background: `radial-gradient(circle at 50% 50%, ${accentColor}33 0%, #151619 85%)`
                         }}
                     >
-                        <DottedGlowBackground 
-                            color={accentColor}
-                            speed={0.3}
-                            gap={12}
-                            radius={1}
-                            className="opacity-60"
-                        />
+                        {/* Map Hover Area */}
+                        <div className="absolute inset-0 group/track z-10">
+                            <DottedGlowBackground 
+                                color={accentColor}
+                                speed={0.3}
+                                gap={12}
+                                radius={1}
+                                className="opacity-60"
+                            />
 
-                        <div className="relative z-10 w-full h-full flex items-center justify-center pt-8 px-8 pb-32">
-                            {race.trackMap ? (
-                                <img 
-                                    src={race.trackMap} 
-                                    className="max-w-full max-h-full object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] transform scale-110 group-hover/track:scale-125 transition-transform duration-700" 
-                                    alt={`${race.circuitName}`} 
-                                />
-                            ) : (
-                                <MapPin size={64} className="text-white/10" />
-                            )}
+                            <div className="relative w-full h-full flex items-center justify-center p-8 @[375px]:p-4 @[768px]:p-12 @[768px]:pb-24">
+                                {race.trackMap ? (
+                                    <img 
+                                        src={race.trackMap} 
+                                        className="max-w-full max-h-full object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] transform scale-110 group-hover/track:scale-125 transition-transform duration-700" 
+                                        alt={`${race.circuitName}`} 
+                                    />
+                                ) : (
+                                    <MapPin size={64} className="text-white/10" />
+                                )}
+                            </div>
                         </div>
                         
-                        {/* Location Overlay */}
-                        <div className="absolute bottom-4 left-6 z-20 flex flex-col items-start">
-                            <div className="mb-4 flex flex-col items-start gap-2">
-                                <div className="text-[10px] font-black uppercase text-f1-pink tracking-widest not-italic leading-none">Round {race.round}</div>
-                                <span className={`text-[10px] font-black px-2 py-1 rounded skew-x-[-12deg] shadow-glow not-italic uppercase tracking-widest w-fit ${race.format === 'sprint' ? 'bg-orange-600 text-white' : 'bg-white/10 text-white/60'}`}>
-                                    {race.format === 'sprint' ? 'Sprint Weekend' : 'Standard Weekend'}
-                                </span>
-                            </div>
-                            <div>
-                                <div className="text-[10px] font-black uppercase text-white/40 tracking-widest not-italic mb-1">Circuit Location</div>
-                                <div className="text-xl font-bold text-white uppercase leading-none">{race.city}</div>
+                        {/* Centered City Overlay - Only for Desktop */}
+                        <div className="absolute bottom-6 left-0 right-0 z-20 hidden @[768px]:flex justify-center">
+                            <div className="bg-black/40 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10 flex items-center gap-2 shadow-2xl transition-all hover:bg-f1-pink/20 hover:border-f1-pink/30">
+                                <MapPin size={12} className="text-f1-pink" />
+                                <span className="text-sm font-bold text-white uppercase tracking-widest translate-y-[2px]">{race.city}</span>
                             </div>
                         </div>
                     </div>
@@ -119,12 +116,36 @@ export const EventEditor: React.FC<{ block: ContentBlock }> = ({ block }) => {
                     {/* Schedule Area */}
                     <div className="w-full @[768px]:w-7/12 p-6 flex flex-col justify-center relative bg-f1-card z-20">
                         
-                        <div className="mb-6 border-b border-white/5 pb-4">
-                            <div className="flex items-center mb-1">
-                                <span className="text-[10px] font-black uppercase text-zinc-400 tracking-widest not-italic">Streckenname</span>
+                        <div className="mb-6 border-b border-white/5 pb-6 flex flex-col @[375px]:flex-row @[375px]:items-center @[375px]:justify-between gap-4">
+                            <div>
+                                <div className="group/circuit inline-block mb-1">
+                                    <div className="text-2xl font-bold text-white/80 leading-none uppercase tracking-tight transition-all group-hover/circuit:text-white group-hover/circuit:underline decoration-2 underline-offset-4 decoration-f1-pink">
+                                        {race.circuitName}
+                                    </div>
+                                </div>
+
+                                {/* Minimal City for Mobile (< 375px) */}
+                                <div className="flex items-center gap-1.5 text-[10px] font-bold text-f1-pink uppercase tracking-widest mb-2.5 @[375px]:hidden">
+                                    <MapPin size={10} className="translate-y-[1px]" />
+                                    <span className="translate-y-[2px]">{race.city}</span>
+                                </div>
+
+                                {/* Minimal Info Row */}
+                                <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-white/40">
+                                    <span className="translate-y-[1px] hover:text-f1-pink transition-colors cursor-pointer">Runde {race.round}</span>
+                                    <span className="w-1 h-1 rounded-full bg-white/10"></span>
+                                    <span className={`translate-y-[1px] hover:text-f1-pink transition-colors cursor-pointer ${race.format === 'sprint' ? 'text-orange-500/60' : ''}`}>
+                                        {race.format === 'sprint' ? 'Sprint-Wochenende' : 'Standard-Wochenende'}
+                                    </span>
+                                </div>
                             </div>
-                            <div className="text-2xl font-bold text-white leading-none uppercase tracking-tight">
-                                {race.circuitName}
+
+                            {/* City Badge for Tablet Mode (375px - 768px) */}
+                            <div className="hidden @[375px]:flex @[768px]:hidden">
+                                <div className="bg-white/5 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10 flex items-center gap-2 shadow-sm hover:bg-f1-pink/20 hover:border-f1-pink/30 transition-all">
+                                    <MapPin size={12} className="text-f1-pink" />
+                                    <span className="text-sm font-bold text-white uppercase tracking-widest translate-y-[2px]">{race.city}</span>
+                                </div>
                             </div>
                         </div>
 
@@ -143,17 +164,17 @@ export const EventEditor: React.FC<{ block: ContentBlock }> = ({ block }) => {
                                             }`}
                                         >
                                             <div className="flex items-center gap-3">
-                                                <div className={`w-1 h-4 rounded-full transition-transform group-hover/session:scale-y-125 ${isRace ? 'bg-f1-pink' : 'bg-white/20'}`}></div>
-                                                <span className={`text-sm font-bold uppercase tracking-wide transition-colors ${isRace ? 'text-white' : 'text-zinc-400 group-hover/session:text-white'}`}>
+                                                <div className={`w-1 h-4 rounded-full ${isRace ? 'bg-f1-pink' : 'bg-white/20'}`}></div>
+                                                <span className={`text-sm font-bold uppercase tracking-wide transition-colors translate-y-[2px] ${isRace ? 'text-white' : 'text-zinc-400 group-hover/session:text-white'}`}>
                                                     {getSessionLabel(key)}
                                                 </span>
                                             </div>
                                             <div className="flex items-center gap-4 text-right">
                                                 <div className="flex items-center gap-3">
-                                                    <span className={`text-sm font-bold uppercase not-italic leading-none ${isRace ? 'text-f1-pink' : 'text-zinc-500'}`}>
+                                                    <span className={`text-sm font-bold uppercase not-italic leading-none translate-y-[2px] ${isRace ? 'text-f1-pink' : 'text-zinc-500'}`}>
                                                         {formatDate(dateStr)}
                                                     </span>
-                                                    <span className={`text-lg font-black italic leading-none tabular-nums ${isRace ? 'text-white' : 'text-zinc-300'}`}>
+                                                    <span className={`text-lg font-black italic leading-none tabular-nums translate-y-[2px] ${isRace ? 'text-white' : 'text-zinc-300'}`}>
                                                         {formatTime(dateStr)}
                                                     </span>
                                                 </div>

@@ -74,7 +74,7 @@ export const TitleWatchEditor: React.FC<{ block: ContentBlock }> = ({ block }) =
                                     <div className="w-1.5 h-10 rounded-full mr-4" style={{ backgroundColor: t?.color || '#ccc' }}></div>
                                     <div className="flex items-center">
                                         <div className="w-10 h-10 rounded-full overflow-hidden border border-white/10 mr-4 bg-white/10">
-                                            <img src={isDrivers ? (c as any).image : (c as any).logo} className="w-full h-full object-cover" alt="" />
+                                            {(isDrivers ? (c as any).image : (c as any).logo) && <img src={isDrivers ? (c as any).image : (c as any).logo} className="w-full h-full object-cover" alt="" />}
                                         </div>
                                         <span className="text-3xl font-black text-white uppercase group-hover:text-f1-pink transition-colors tracking-tighter">
                                             {isDrivers ? (c as any).lastName : (c as any).name}

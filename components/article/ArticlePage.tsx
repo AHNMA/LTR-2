@@ -82,11 +82,13 @@ const ArticlePage: React.FC = () => {
       {/* Hero Media */}
       <div className="container mx-auto px-0 md:px-4 lg:max-w-6xl mb-12">
         <div className="relative aspect-video md:rounded-2xl overflow-hidden shadow-2xl group bg-f1-card border border-white/5">
-            <img 
-                src={post.image} 
-                alt={post.title} 
-                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700"
-            />
+            {post.image && (
+                <img 
+                    src={post.image} 
+                    alt={post.title} 
+                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700"
+                />
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-f1-dark via-transparent to-transparent"></div>
             <div className="absolute bottom-0 left-0 w-full p-6 md:p-8 pt-20 z-10 flex flex-col justify-end items-start">
                 <div className="flex flex-col space-y-2 w-full max-w-2xl font-display">

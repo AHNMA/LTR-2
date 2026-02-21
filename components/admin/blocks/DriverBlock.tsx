@@ -86,7 +86,7 @@ export const DriverEditor: React.FC<{ block: ContentBlock }> = ({ block }) => {
                                     <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-wider font-sans not-italic">Nation</span>
                                 </div>
                                 <div className="flex items-center justify-center">
-                                    <img src={getFlagUrl(driver.nationalityFlag)} className="w-[18px] aspect-[3/2] object-cover border border-black/30 mr-1.5 -translate-y-[2px]" alt="" />
+                                    {getFlagUrl(driver.nationalityFlag) && <img src={getFlagUrl(driver.nationalityFlag)} className="w-[18px] aspect-[3/2] object-cover border border-black/30 mr-1.5 -translate-y-[2px]" alt="" />}
                                     <span className="text-lg font-bold text-white uppercase">{driver.nationalityFlag}</span>
                                 </div>
                             </div>

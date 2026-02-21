@@ -99,12 +99,14 @@ export const GalleryEditor: React.FC<{ block: ContentBlock }> = ({ block }) => {
                                     onDrop={(e) => handleDrop(e, i)}
                                 >
                                     <div className="relative w-full overflow-hidden" style={getAspectRatioStyle()}>
-                                        <img 
-                                            src={img.url} 
-                                            className="absolute inset-0 w-full h-full transition-opacity duration-500 opacity-100 group-hover/item:opacity-90"
-                                            style={{ objectFit: crop ? 'cover' : 'contain', objectPosition: objectPosition }}
-                                            alt="" 
-                                        />
+                                        {img.url && (
+                                            <img 
+                                                src={img.url} 
+                                                className="absolute inset-0 w-full h-full transition-opacity duration-500 opacity-100 group-hover/item:opacity-90"
+                                                style={{ objectFit: crop ? 'cover' : 'contain', objectPosition: objectPosition }}
+                                                alt="" 
+                                            />
+                                        )}
                                         
                                         {/* Credits (Bottom Left, Text Only, Full Width, Multiline) */}
                                         <div className="absolute bottom-2 left-2 right-2 z-30">

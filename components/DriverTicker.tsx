@@ -97,11 +97,13 @@ const DriverTicker: React.FC = () => {
 
                         {/* Image */}
                         <div className={`relative ${isDriver ? 'w-10 h-10 rounded-full' : 'w-10 h-8 rounded-md'} overflow-hidden border border-white/10 bg-white/5`}>
-                            <img 
-                                src={imageUrl} 
-                                alt={displayName} 
-                                className="w-full h-full object-cover"
-                            />
+                            {imageUrl && (
+                                <img 
+                                    src={imageUrl} 
+                                    alt={displayName} 
+                                    className="w-full h-full object-cover"
+                                />
+                            )}
                         </div>
 
                         {/* Info */}

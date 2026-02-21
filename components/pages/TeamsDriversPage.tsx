@@ -34,7 +34,7 @@ const TeamsDriversPage: React.FC = () => {
                         </div>
                         <div>
                             <div className="flex items-center space-x-2 mb-2">
-                                <img src={getFlagUrl(team.nationalityFlag)} alt="" className="h-5 w-auto border border-black/50 rounded-sm" />
+                                {getFlagUrl(team.nationalityFlag) && <img src={getFlagUrl(team.nationalityFlag)} alt="" className="h-5 w-auto border border-black/50 rounded-sm" />}
                                 <span className="text-[10px] font-black uppercase text-slate-500 tracking-[0.2em]">Est. {team.entryYear}</span>
                             </div>
                             <h2 className="text-3xl md:text-5xl font-display font-bold text-white uppercase italic leading-none group-hover:text-f1-pink transition-colors tracking-tight">
@@ -71,7 +71,7 @@ const TeamsDriversPage: React.FC = () => {
                                     {driver.lastName}
                                 </h3>
                                 <div className="flex justify-center items-center space-x-2 mb-8">
-                                     <img src={getFlagUrl(driver.nationalityFlag)} alt="" className="h-4 w-auto border border-black/50" />
+                                     {getFlagUrl(driver.nationalityFlag) && <img src={getFlagUrl(driver.nationalityFlag)} alt="" className="h-4 w-auto border border-black/50" />}
                                      <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{driver.nationalityText}</span>
                                 </div>
 

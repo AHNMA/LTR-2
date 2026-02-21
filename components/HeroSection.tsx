@@ -55,7 +55,7 @@ const HeroSection: React.FC = () => {
                         className="flex space-x-3 group cursor-pointer items-center px-4 border-b border-white/5 h-[92px] hover:bg-white/5 transition-colors"
                     >
                          <div className="relative w-16 h-16 flex-shrink-0 overflow-hidden rounded-xl border border-white/10 bg-slate-800">
-                            <img src={post.image} alt="" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100" />
+                            {post.image && <img src={post.image} alt="" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100" />}
                          </div>
                         <div className="flex flex-col flex-1 min-w-0">
                             <h4 className="text-lg font-bold text-white group-hover:text-f1-pink leading-tight mb-1 line-clamp-2 transition-colors uppercase tracking-tight">
@@ -82,11 +82,13 @@ const HeroSection: React.FC = () => {
 
         {/* Center Column: Highlight Image (6 cols) */}
         <div onClick={() => goToArticle(highlightPost.id)} className="lg:col-span-6 relative group cursor-pointer min-h-[400px] lg:h-[560px] rounded-2xl overflow-hidden shadow-2xl border border-white/5">
-            <img 
-                src={highlightPost.image} 
-                alt={highlightPost.title} 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
+            {highlightPost.image && (
+                <img 
+                    src={highlightPost.image} 
+                    alt={highlightPost.title} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+            )}
             {/* Overlay Gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-f1-dark via-f1-dark/40 to-transparent opacity-95"></div>
             

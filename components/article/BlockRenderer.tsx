@@ -186,7 +186,7 @@ const BlockRenderer: React.FC<BlockRendererProps> = ({ block }) => {
                                             <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-wider font-sans not-italic group-hover/stat:text-white transition-colors">Nation</span>
                                         </div>
                                         <div className="flex items-center justify-center">
-                                            <img src={getFlagUrl(driver.nationalityFlag)} className="w-[18px] aspect-[3/2] object-cover border border-black/30 mr-1.5 -translate-y-[2px]" alt="" />
+                                            {getFlagUrl(driver.nationalityFlag) && <img src={getFlagUrl(driver.nationalityFlag)} className="w-[18px] aspect-[3/2] object-cover border border-black/30 mr-1.5 -translate-y-[2px]" alt="" />}
                                             <span className="text-lg font-bold text-white uppercase">{driver.nationalityFlag}</span>
                                         </div>
                                     </div>
@@ -284,7 +284,7 @@ const BlockRenderer: React.FC<BlockRendererProps> = ({ block }) => {
                                             <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-wider font-sans not-italic group-hover/stat:text-white transition-colors">Nation</span>
                                         </div>
                                         <div className="flex items-center justify-center">
-                                            <img src={getFlagUrl(team.nationalityFlag)} className="w-[18px] aspect-[3/2] object-cover border border-black/30 mr-1.5 -translate-y-[2px]" alt="" />
+                                            {getFlagUrl(team.nationalityFlag) && <img src={getFlagUrl(team.nationalityFlag)} className="w-[18px] aspect-[3/2] object-cover border border-black/30 mr-1.5 -translate-y-[2px]" alt="" />}
                                             <span className="text-lg font-bold text-white uppercase">{team.nationalityFlag}</span>
                                         </div>
                                     </div>
@@ -354,12 +354,12 @@ const BlockRenderer: React.FC<BlockRendererProps> = ({ block }) => {
                 'right': 'ml-auto'
             }[align as string] || 'mx-auto';
 
-            const fontSizeClass = level === 2 ? 'text-4xl md:text-5xl lg:text-[48px]' : 'text-3xl md:text-4xl lg:text-[36px]';
+            const fontSizeClass = level === 2 ? 'text-3xl md:text-5xl lg:text-[48px]' : 'text-2xl md:text-4xl lg:text-[36px]';
 
             return (
                 <div className={`flex items-stretch ${widthClass} ${alignClass}`}>
                     <div className="w-3 bg-f1-pink mr-4 shrink-0 skew-x-[-12deg] mt-[-1px] mb-[9px] shadow-glow" />
-                    <Tag className={`font-display font-black text-white uppercase italic tracking-tighter leading-[0.9] m-0 flex-1 min-w-0 break-words ${fontSizeClass}`} style={{ textAlign: textAlign }}>
+                    <Tag className={`font-display font-black text-white uppercase italic tracking-tighter leading-[1.1] m-0 flex-1 min-w-0 break-words ${fontSizeClass}`} style={{ textAlign: textAlign }}>
                         {content}
                     </Tag>
                 </div>
@@ -682,7 +682,7 @@ const BlockRenderer: React.FC<BlockRendererProps> = ({ block }) => {
             const widthClass = isCard ? ({ 'small': 'w-full md:w-1/3', 'medium': 'w-full md:w-2/3', 'large': 'w-full md:w-5/6', 'full': 'w-full' }[blockSize as string] || 'w-full') : 'w-full';
             const alignClass = isCard ? ({ 'left': 'mr-auto', 'center': 'mx-auto', 'right': 'ml-auto' }[align as string] || 'mx-auto') : '';
             if (!isCard) { return (<div className="w-full border-l-4 border-f1-pink pl-6 py-4 font-display italic"><div className="flex items-center mb-2"><div className="bg-f1-pink text-white text-[9px] font-black uppercase px-2 py-0.5 rounded tracking-widest mr-3 font-sans">{author || 'AUTOR'}</div></div><div className="text-xl md:text-2xl font-bold text-white leading-tight uppercase">{content}</div></div>); }
-            return (<div className={`bg-f1-card rounded-2xl overflow-hidden shadow-2xl border border-white/5 font-display italic ${widthClass} ${alignClass} group/comment`}><div className="p-6 pb-2 border-b border-white/5 bg-white/5 flex items-center justify-between"><div className="flex items-center text-white"><User size={20} className="text-f1-pink mr-3 mb-1 shrink-0 -translate-y-[2px]" /><span className="font-black text-2xl uppercase italic tracking-tight">{author || 'AUTOR'}</span></div><div className="text-[10px] font-black uppercase text-white/20 tracking-widest hidden md:block font-sans">Editorial Comment</div></div><div className="h-1 w-full bg-gradient-to-r from-f1-pink to-f1-card"></div><div className="p-6 relative"><div className="relative z-10 w-full text-white/90 font-bold text-xl md:text-2xl uppercase tracking-wide leading-relaxed">{content}</div></div></div>);
+            return (<div className={`bg-f1-card rounded-2xl overflow-hidden shadow-2xl border border-white/5 font-display italic ${widthClass} ${alignClass} group/comment`}><div className="p-6 pb-2 border-b border-white/5 bg-white/5 flex items-center justify-between"><div className="flex items-center text-white"><User size={20} className="text-f1-pink mr-3 mb-1 shrink-0 -translate-y-[2px]" /><span className="font-black text-2xl uppercase italic tracking-tight">{author || 'AUTOR'}</span></div></div><div className="h-1 w-full bg-gradient-to-r from-f1-pink to-f1-card"></div><div className="p-6 relative"><div className="relative z-10 w-full text-white/90 font-bold text-xl md:text-2xl uppercase tracking-wide leading-relaxed">{content}</div></div></div>);
         }
 
         case 'f1/title-watch': {
@@ -745,50 +745,73 @@ const BlockRenderer: React.FC<BlockRendererProps> = ({ block }) => {
             return (
                 <div className="w-full font-display italic">
                     <div 
-                        className="bg-f1-card rounded-2xl overflow-hidden shadow-2xl border border-white/5 relative cursor-pointer"
-                        onClick={() => goToStandings()}
+                        className="bg-f1-card rounded-2xl overflow-hidden shadow-2xl border border-white/5 relative cursor-pointer group"
+                        onClick={() => goToCalendar()}
                     >
                         <div className="p-6 pb-2 border-b border-white/5 bg-white/5 flex items-center justify-between relative z-20">
                              <div className="flex items-center gap-4">
                                 <div className="flex flex-col">
-                                    <div className="text-white font-black text-3xl md:text-4xl uppercase italic tracking-tight leading-none flex items-center gap-3">
-                                        {race.country}
-                                        <img src={getFlagUrl(race.flag)} className="w-[26px] aspect-[3/2] object-cover border border-black/30 -translate-y-[4px]" alt="" />
+                                    <div className="text-white font-black text-3xl uppercase italic tracking-tight leading-none flex items-center gap-3">
+                                        <span className="hover:text-f1-pink transition-colors">{race.country}</span>
+                                        {getFlagUrl(race.flag) && <img src={getFlagUrl(race.flag)} className="w-[26px] aspect-[3/2] object-cover border border-black/30 -translate-y-[3px]" alt="" />}
                                     </div>
                                 </div>
                              </div>
                         </div>
                         <div className="h-1 w-full z-20 relative" style={{ background: `linear-gradient(90deg, ${accentColor} 0%, #1b1c20 100%)` }}></div>
                         <div className="flex flex-col @[768px]:flex-row relative">
-                            <div className="w-full @[768px]:w-5/12 relative overflow-hidden border-b @[768px]:border-b-0 @[768px]:border-r border-white/5 flex items-center justify-center h-52 @[768px]:h-auto min-h-[250px] group/track" style={{ background: `radial-gradient(circle at 50% 50%, ${accentColor}33 0%, #151619 85%)` }}>
-                                <DottedGlowBackground color={accentColor} speed={0.3} gap={12} radius={1} className="opacity-60" />
-                                <div className="relative z-10 w-full h-full flex items-center justify-center pt-8 px-8 pb-32">
-                                    {race.trackMap ? (
-                                        <img src={race.trackMap} className="max-w-full max-h-full object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] transform scale-110 group-hover/track:scale-125 transition-transform duration-700" alt={`${race.circuitName}`} />
-                                    ) : (
-                                        <MapPin size={64} className="text-white/10" />
-                                    )}
-                                </div>
-                                <div className="absolute bottom-4 left-6 z-20 flex flex-col items-start">
-                                    <div className="mb-4 flex flex-col items-start gap-2">
-                                        <div className="text-[10px] font-black uppercase text-f1-pink tracking-widest not-italic leading-none">Round {race.round}</div>
-                                        <span className={`text-[10px] font-black px-2 py-1 rounded skew-x-[-12deg] shadow-glow not-italic uppercase tracking-widest w-fit ${race.format === 'sprint' ? 'bg-orange-600 text-white' : 'bg-white/10 text-white/60'}`}>
-                                            {race.format === 'sprint' ? 'Sprint Weekend' : 'Standard Weekend'}
-                                        </span>
+                            <div className="w-full @[768px]:w-5/12 relative overflow-hidden border-b @[768px]:border-b-0 @[768px]:border-r border-white/5 flex items-center justify-center h-52 @[768px]:h-auto min-h-[250px]" style={{ background: `radial-gradient(circle at 50% 50%, ${accentColor}33 0%, #151619 85%)` }}>
+                                {/* Map Hover Area */}
+                                <div className="absolute inset-0 group/track z-10">
+                                    <DottedGlowBackground color={accentColor} speed={0.3} gap={12} radius={1} className="opacity-60" />
+                                    <div className="relative w-full h-full flex items-center justify-center p-8 @[375px]:p-4 @[768px]:p-12 @[768px]:pb-24">
+                                        {race.trackMap ? (
+                                            <img src={race.trackMap} className="max-w-full max-h-full object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] transform scale-110 group-hover/track:scale-125 transition-transform duration-700" alt={`${race.circuitName}`} />
+                                        ) : (
+                                            <MapPin size={64} className="text-white/10" />
+                                        )}
                                     </div>
-                                    <div>
-                                        <div className="text-[10px] font-black uppercase text-white/40 tracking-widest not-italic mb-1">Circuit Location</div>
-                                        <div className="text-xl font-bold text-white uppercase leading-none">{race.city}</div>
+                                </div>
+                                
+                                {/* Centered City Overlay - Only for Desktop */}
+                                <div className="absolute bottom-6 left-0 right-0 z-20 hidden @[768px]:flex justify-center">
+                                    <div className="bg-black/40 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10 flex items-center gap-2 shadow-2xl transition-all hover:bg-f1-pink/20 hover:border-f1-pink/30">
+                                        <MapPin size={12} className="text-f1-pink" />
+                                        <span className="text-sm font-bold text-white uppercase tracking-widest translate-y-[2px]">{race.city}</span>
                                     </div>
                                 </div>
                             </div>
                             <div className="w-full @[768px]:w-7/12 p-6 flex flex-col justify-center relative bg-f1-card z-20">
-                                <div className="mb-6 border-b border-white/5 pb-4">
-                                    <div className="flex items-center mb-1">
-                                        <span className="text-[10px] font-black uppercase text-zinc-400 tracking-widest not-italic">Streckenname</span>
+                                <div className="mb-6 border-b border-white/5 pb-6 flex flex-col @[375px]:flex-row @[375px]:items-center @[375px]:justify-between gap-4">
+                                    <div>
+                                        <div className="group/circuit inline-block mb-1">
+                                            <div className="text-2xl font-bold text-white/80 leading-none uppercase tracking-tight transition-all group-hover/circuit:text-white group-hover/circuit:underline decoration-2 underline-offset-4 decoration-f1-pink">
+                                                {race.circuitName}
+                                            </div>
+                                        </div>
+
+                                        {/* Minimal City for Mobile (< 375px) */}
+                                        <div className="flex items-center gap-1.5 text-[10px] font-bold text-f1-pink uppercase tracking-widest mb-2.5 @[375px]:hidden">
+                                            <MapPin size={10} className="translate-y-[1px]" />
+                                            <span className="translate-y-[2px]">{race.city}</span>
+                                        </div>
+
+                                        {/* Minimal Info Row */}
+                                        <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-white/40">
+                                            <span className="translate-y-[1px] hover:text-f1-pink transition-colors cursor-pointer">Runde {race.round}</span>
+                                            <span className="w-1 h-1 rounded-full bg-white/10"></span>
+                                            <span className={`translate-y-[1px] hover:text-f1-pink transition-colors cursor-pointer ${race.format === 'sprint' ? 'text-orange-500/60' : ''}`}>
+                                                {race.format === 'sprint' ? 'Sprint-Wochenende' : 'Standard-Wochenende'}
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div className="text-2xl font-bold text-white leading-none uppercase tracking-tight">
-                                        {race.circuitName}
+
+                                    {/* City Badge for Tablet Mode (375px - 768px) */}
+                                    <div className="hidden @[375px]:flex @[768px]:hidden">
+                                        <div className="bg-white/5 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10 flex items-center gap-2 shadow-sm hover:bg-f1-pink/20 hover:border-f1-pink/30 transition-all">
+                                            <MapPin size={12} className="text-f1-pink" />
+                                            <span className="text-sm font-bold text-white uppercase tracking-widest translate-y-[2px]">{race.city}</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="space-y-2">
@@ -809,17 +832,17 @@ const BlockRenderer: React.FC<BlockRendererProps> = ({ block }) => {
                                                 }`}
                                             >
                                                 <div className="flex items-center gap-3">
-                                                    <div className={`w-1 h-4 rounded-full transition-transform group-hover/session:scale-y-125 ${isRace ? 'bg-f1-pink' : 'bg-white/20'}`}></div>
-                                                    <span className={`text-sm font-bold uppercase tracking-wide transition-colors ${isRace ? 'text-white' : 'text-zinc-400 group-hover/session:text-white'}`}>
+                                                    <div className={`w-1 h-4 rounded-full ${isRace ? 'bg-f1-pink' : 'bg-white/20'}`}></div>
+                                                    <span className={`text-sm font-bold uppercase tracking-wide transition-colors translate-y-[2px] ${isRace ? 'text-white' : 'text-zinc-400 group-hover/session:text-white'}`}>
                                                         {getSessionLabel(key)}
                                                     </span>
                                                 </div>
                                                 <div className="flex items-center gap-4 text-right">
                                                     <div className="flex items-center gap-3">
-                                                        <span className={`text-sm font-bold uppercase not-italic leading-none ${isRace ? 'text-f1-pink' : 'text-zinc-500'}`}>
+                                                        <span className={`text-sm font-bold uppercase not-italic leading-none translate-y-[2px] ${isRace ? 'text-f1-pink' : 'text-zinc-500'}`}>
                                                             {formatDate(dateStr)}
                                                         </span>
-                                                        <span className={`text-lg font-black italic leading-none tabular-nums ${isRace ? 'text-white' : 'text-zinc-300'}`}>
+                                                        <span className={`text-lg font-black italic leading-none tabular-nums translate-y-[2px] ${isRace ? 'text-white' : 'text-zinc-300'}`}>
                                                             {formatTime(dateStr)}
                                                         </span>
                                                     </div>
